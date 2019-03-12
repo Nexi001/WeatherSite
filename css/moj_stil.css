@@ -1,0 +1,229 @@
+*{/*ovo radi uvek jer to je resartovanje da sve margine automatski budu na 0 ;) */
+margin:0px;
+padding:0px;
+}
+.bojaoklop{background-color: rgba(7, 88, 249, 0.9);margin-top: 2px;margin-bottom: 2px;padding:15px;}
+.box{
+width:100%;
+border:3px solid blue;
+-webkit-transition: -webkit-transform 2s;/*to jest sta hoces da animiras npr hocu ovaj dole webkit ispod, ako ne stavis sekunde odamh cim predjes mis to uradi zanimljivo ha?*/
+-moz-transition: -webkit-transform 2s;
+}
+.box:hover{
+width:150%;
+border:3px solid red;
+-webkit-transform:translate(-24px,-24px) rotate(360deg) scale(.8);
+-moz-transform:translate(-24px,-24px) rotate(360deg) scale(.8);
+}
+
+
+.pomeranje{margin-right:-17px; }
+a:visited {text-decoration: none;
+    color: white;
+}
+.linkovi_navigacija  a:visited  {text-decoration: none; color:white;}
+.linkovi_navigacija a:link {text-decoration: none; color:white;}
+.active a:link {background-color:grey;border: 10px solid grey;  }
+.active a:visited{background-color:grey;border-left: 10px solid grey;border-right: 10px solid grey; }
+
+
+#futer{
+text-align: center;
+pading:20px;
+background-color:blue;
+padding: 10px;
+
+}
+h1{
+font-size: 1.5em;color:red;
+}
+h2 {color:yellow;
+    font-size: 110% ;
+}
+p{font-size:1.1em; color:white;}
+header, section, footer, aside, nav, article, hgroup{
+display:block;
+}
+body{font-family: 'PT Sans', sans-serif;
+width:100%;
+display:-webkit-box;
+-webkit-box-pack: center;
+display:-moz-box;
+-moz-box-pack: center;
+}
+
+#top_header{
+background: yellow;
+border: 3px solid black
+padding: 20px;
+}
+#top_menu{
+background-color: blue; 
+}
+#top_menu li{
+display: inline-block;/*ovo znas sta je onaj prozor da krece da zauzeme prostora taman koliko mu treba*/
+list-style: none;
+border-top:10px blue solid;border-bottom:10px blue solid;
+ margin-right:10px;
+background: blue;
+color:white;
+font:bold 0.8em Tahoma;
+opacity:0.8;
+}
+#omotac{
+max-width: 60em;
+margin: 20px 0px;
+display:-webkit-box;
+-webkit-box-orient: vertical;/* (da ide sve kako treba mozes da se igras da stavis horizontal i onda ce sve da ide lose da bude sve horizontalno probaj slobodno)*/
+-webkit-box-flex: 1; (ovo je da ovaj box radi ako je 0 ono ce biti malo ovako nece, tj zauzece ako je 1 ceo prozor od 1000px)
+display:-moz-box;
+-moz-box-orient: vertical;
+-moz-box-flex: 1;
+}
+#new_div{
+display: -webkit-box;/* ovo je za obadva prozora za beli i za zuti, da budu jedan pored drugog*/
+-webkit-box-orient: horizontal;/* da budu horizontalni*/
+-moz-box-orient: horizontal;
+}
+#main_section{ /* levi prozor sa belom ivicom*/ 
+
+border: 1px solid blue;
+-webkit-box-flex: 1;/* isto da bude flexibilan za mob telefone*/
+margin: 2px 0px 2px 0px; 
+padding:20px;
+background-color: rgba(7, 88, 249, 0.9); 
+    opacity: 0.99;
+
+}
+
+
+.container-left {
+	float: left;
+	width: 57%;
+	margin-left: 0 px;
+	margin-right: 24px;
+	height: 650px;
+	background-color: rgba(7, 88, 249, 0.5); 
+	opacity: 0.99;
+	margin-top: 0; 	
+}
+
+.container-right {
+	float: left;
+	width: 31%;
+margin-left: 0 px;
+margin-right: 0px;
+	height: 435px;
+	background-color: rgba(7, 55, 249, 0.5);
+	opacity: 0.99;
+	margin-top: 0;
+}
+
+
+
+@media only screen and (max-device-width:750px) or (max-width: 480px)   {
+ .container-novi {
+    margin-right: 0;
+    margin-left: 0;
+}
+#top_menu li{
+font:bold 0.3em Tahoma;
+    
+}
+.box{
+width:100%;
+border:3px solid blue;
+-webkit-transition: -webkit-transform 40s;/*to jest sta hoces da animiras npr hocu ovaj dole webkit ispod, ako ne stavis sekunde odamh cim predjes mis to uradi zanimljivo ha?*/
+-moz-transition: -webkit-transform 40s;
+}
+.box:active{
+width:110%;
+border:3px solid red;
+-webkit-transform:translate(-24px,-24px) rotate(0deg) scale(.8);
+-moz-transform:translate(-24px,-24px) rotate(0deg) scale(.8);}
+h2{font-size: 140%;}
+p{font-size: 1em;}
+.box:hover{
+width:105%;
+border:3px solid red;
+-webkit-transform:translate(-24px,-24px) rotate(0deg) scale(.8);
+-moz-transform:translate(-24px,-24px) rotate(0deg) scale(.8);
+}
+h2{font-size: 140%;}
+p{font-size: 1em;}
+#top_menu li{
+display: inline-block;/*ovo znas sta je onaj prozor da krece da zauzeme prostora taman koliko mu treba*/
+list-style: none;
+/*border:3px solid red;*/
+background: blue;
+padding: 0.1em;
+color:white;
+font:bold 0.8em Tahoma;
+opacity:0.8;
+}
+#new_div{
+
+display: -webkit-box;/* ovo je za obadva prozora za beli i za zuti, da budu jedan pored drugog*/
+display: -moz-box;
+-webkit-box-orient: vertical;/* da budu horizontalni*/
+-moz-box-orient: vertical;
+}
+#main_section{ /* levi prozor sa belom ivicom*/ 
+
+-webkit-box-flex: 1;/* isto da bude flexibilan za mob telefone*/
+-moz-box-flex: 1;
+margin-top:5px;
+padding: 20px;
+}
+#side_news{ /* drugi prozor i ovaj nema ovu flexibilnost, vidis i sam jer nema onog webkit*/
+
+padding: 30px;
+-webkit-box-flex: 1;/* kada ocekiras tj skines kom. ovaj webkit onda ce se moci da se smanjuje a sad je fixno nema smanjivanja ovo je odlicna stvar webkit samo moras malo da pogledas. */
+-moz-box-flex: 1;
+margin-left: 0;
+}
+}
+
+
+@media screen and (max-width: 480px) {
+ .container-novi {
+    margin-right: 0;
+    margin-left: 0;
+}
+#new_div{
+display: -webkit-box;/* ovo je za obadva prozora za beli i za zuti, da budu jedan pored drugog*/
+-webkit-box-orient: vertical;/* da budu horizontalni*/
+-moz-box-orient: vertical;
+}
+.box{
+width:60%;
+border:3px solid blue;
+-webkit-transition: -webkit-transform 40s;/*to jest sta hoces da animiras npr hocu ovaj dole webkit ispod, ako ne stavis sekunde odamh cim predjes mis to uradi zanimljivo ha?*/
+-moz-transition: -moz-transform 40s;
+}
+.box:hover{
+width:100%;
+border:3px solid red;
+-webkit-transform:translate(-24px,-24px) rotate(0deg) scale(.8);
+-moz-transform:translate(-24px,-24px) rotate(0deg) scale(.8);}
+
+#new_div{
+display: -webkit-box;/* ovo je za obadva prozora za beli i za zuti, da budu jedan pored drugog*/
+-webkit-box-orient: vertical;/* da budu horizontalni*/
+-moz-box-orient: vertical;
+}
+#main_section{ /* levi prozor sa belom ivicom*/ 
+margin: 2 0 2 0;
+-webkit-box-flex: 1;/* isto da bude flexibilan za mob telefone*/
+-moz-box-flex: 1;
+margin-right:0px;
+padding: 20px;
+width: calc(document.getElementById(elementOne).width;
+}
+#side_news{ /* drugi prozor i ovaj nema ovu flexibilnost, vidis i sam jer nema onog webkit*/
+margin: 2 10 2 0;
+padding: 20px;
+width: calc(document.getElementById(elementOne).width;
+-webkit-box-flex: 1;/* kada ocekiras tj skines kom. ovaj webkit onda ce se moci da se smanjuje a sad je fixno nema smanjivanja ovo je odlicna stvar webkit samo moras malo da pogledas. */
+-moz-box-flex: 1;
+}

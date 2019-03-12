@@ -1,0 +1,470 @@
+<!DOCTYPE>
+<meta charset="utf-8">
+  <meta name="author" content="ime autora, mejl">
+    <meta name="keywords" content="prognoza, vreme , oblacno, kisa, oluja ">
+<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+ <meta name="description" content="Prognoza za narednih 7 dana.<br> Vrlo pouzdana i tacna">
+<html>
+<head>
+<link rel ="stylesheet" href="css/moj_stil.css"/>
+<link type="image/icon" href="img/disk.jpg" rel="shortcut icon">
+<title>  Vremenska prognoza | Po&ccaron;etna </title>
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+
+</head>
+
+<body style="background-image:url(img/pozadina.jpg);background-position: 0% 0%;"  text="white" > 
+<div class="container-novi">
+<div id="omotac">
+<header id="top_header">
+<div class="row">
+<div class="col-md-12">
+<a href="index.html"><img width="100%" src="img/heder.jpg" alt="JeftinPrevod | heder"> </a>
+</div>
+
+</div>
+</header>
+<div class="linkovi_navigacija">
+<nav id="top_menu"> 
+<ul> 
+<li class="active"> <a href="index.html"> Po&ccaron;etna </a></li>
+</ul>
+</nav>
+</div>
+<div class="row">
+<div id="new_div">
+<section id="main_section">
+<script src="js/handlebars-v4.0.11.js"></script>
+        <script src="js/qwest.min.js"></script>
+        <script src="js/jquery-3.2.1.min.js"></script>
+
+
+
+	<!-- PRVI ZADATAK-->	
+        <span>1) Grad:</span>
+
+<img src="img/slika2.jpg" alt="Smiley face" width="20%" align="right">
+        <select id="select">
+
+            <option  data-grad="Belgrade" data-drzava="RS">Beograd</option>
+            <option  data-grad="MOSCOW" data-drzava="RU">Moskva</option>
+            <option  data-grad="Cairo" data-drzava="EG">Kairo</option>
+           
+            <option  data-grad="Tokyo" data-drzava="JP">Tokyo</option>
+
+           
+
+        </select>
+
+         <button  onclick="dohvatiZaGrad()">Pretraži</button>
+         
+         
+         <div id="prikaz"></div>
+
+
+
+<!-- PRVI ZADATAK-->
+
+
+
+        <br>
+
+
+<!-- DRUGI ZADATAK-->
+        <span>2) Gradovi:</span>
+        <br>
+ <br> 
+   
+         <input id="ch1" type="checkbox" data-grad="Belgrade" data-drzava="RS">Beograd
+         <input id="ch2" type="checkbox" data-grad="Cairo" data-drzava="EG">Kairo
+         <input id="ch3" type="checkbox" data-grad="Moscow" data-drzava="ru">Moskva
+    
+         <input id="ch5" type="checkbox" data-grad="Tokyo" data-drzava="JP">Tokyo
+        
+         <button  onclick="dohvatiZaGradove()">Pretraži</button>
+       
+
+         <div id="prikaz2"></div> 
+  
+
+<!-- DRUGI ZADATAK-->
+         <br> 
+
+
+<!-- TRECI ZADATAK-->
+
+
+<span>3) Grad za petodnevnu prognozu:</span>
+        <select id="select3">
+
+            <option  data-grad="Belgrade" data-drzava="RS">Beograd</option>
+            <option  data-grad="MOSCOW" data-drzava="RU">Moskva</option>
+            <option  data-grad="Cairo" data-drzava="EG">Kairo</option>
+           
+            <option  data-grad="Tokyo" data-drzava="JP">Tokyo</option>
+            
+        
+           
+
+        </select>
+
+         <button  onclick="dohvatiZaPetDana()">Pretraži</button>
+         <div id="prikaz3"></div>
+
+<!-- TRECI ZADATAK-->
+
+
+<!-- CETRTI ZADATAK-->
+<br>
+<span>4) Gradovi za petodnevnu prognozu:</span>
+        <br>
+ <br> 
+   
+         <input  type="checkbox" data-grad="Belgrade" data-drzava="RS">Beograd
+         <input  type="checkbox" data-grad="Cairo" data-drzava="EG">Kairo				<!--PROMENI GRADOVE-->
+         <input  type="checkbox" data-grad="Moscow" data-drzava="ru">Moskva
+       
+         <input  type="checkbox" data-grad="Tokyo" data-drzava="JP">Tokyo
+        
+        
+<button  onclick="gradoviZaPetDana()">Pretraži</button>
+<div id="prikaz4"></div>
+<!-- CETRVRTI ZADATAK-->
+        
+       <!-- PETI ZADATAK-->
+<br>
+<span>5) Odaberite u kojoj meri da se prikazuju stepeni:</span>
+<button onclick="celzijus()">C</button>
+<button onclick="farenhajt()">F</button>
+<button onclick="kelvin()">K</button>
+
+<br>
+
+
+
+
+<br><br>
+
+
+
+        <!-- PETI ZADATAK-->
+
+
+
+
+        <script>
+
+        let vrednost="metric";
+
+
+
+            <!-- PETI ZADATAK-->
+
+            function celzijus(){
+                vrednost="metric";
+            }
+            function farenhajt(){
+                vrednost="imperial";
+            }
+            function kelvin(){
+                vrednost="";
+            }
+
+            <!-- PETI ZADATAK-->
+
+
+        
+
+         
+        
+
+         let appid = "0b67284f5ffc280cbe64be2dfa32a111";	<!--OVDE STAVI SVOJ APPID-->
+         
+        let opcija = document.getElementById("select");
+
+       <!-- PRVI ZADATAK-->
+        
+         function dohvatiZaGrad(){
+
+           
+           
+            let s = vrednost;
+            prikaz.innerHTML=``;
+            
+            
+            let selektovanaOpcija = opcija.options[opcija.selectedIndex];
+             
+            
+
+            let nazivGrada = selektovanaOpcija.getAttribute("data-grad");
+            let nazivZemlje = selektovanaOpcija.getAttribute("data-drzava");
+                
+            let apiString = "http://api.openweathermap.org/data/2.5/weather?q="
+                        + nazivGrada + ","
+                        + nazivZemlje + "&&units="+s+
+                        "&appid=" + appid; 
+  
+                $.get(apiString, function (response) {
+  
+                             string = response;
+                              
+                                    prikaz.innerHTML +=`<div class="kutija">
+                                    
+
+                                      
+                                    Temperatura: ${Math.round((string.main.temp),0)}  <br>
+                                    Minimalna temperatura: ${Math.round((string.main.temp_min),0)}  <br>
+                                    Maksimalna temperatura: ${Math.round((string.main.temp_max),0)} <br>
+                                </div>`;
+                              });
+                          
+             
+
+
+         
+
+}
+
+<!-- PRVI ZADATAK-->
+
+
+<!-- DRUGI ZADATAK-->
+
+
+ function dohvatiZaGradove(){
+
+           
+           
+
+      
+            
+            
+          
+
+            prikaz2.innerHTML=``;
+            let s = vrednost;
+
+            let cekiraneOpcije = document.getElementsByTagName("input");
+           
+
+            for(var i=0;i<cekiraneOpcije.length/2;i++)
+            {
+
+                if(cekiraneOpcije[i].checked)
+                        {
+            let nazivGrada = cekiraneOpcije[i].getAttribute("data-grad");
+            let nazivZemlje = cekiraneOpcije[i].getAttribute("data-drzava");
+            let apiString = "http://api.openweathermap.org/data/2.5/weather?q="
+                        + nazivGrada + ","
+                        + nazivZemlje + "&&units="+s+
+                        "&appid=" + appid;
+
+
+
+            $.get(apiString, function (response) {
+  
+                             string = response;
+                              
+                                    prikaz2.innerHTML +=`<div class="kutija">
+                                  
+                                              
+                                    Temperatura: ${Math.round((string.main.temp),0)}  <br>
+                                    Minimalna temperatura: ${Math.round((string.main.temp_min),0)}  <br>
+                                    Maksimalna temperatura: ${Math.round((string.main.temp_max),0)}  <br>
+                                  </div>`;
+                              });
+                          }
+              };
+
+            
+
+        
+
+}
+
+<!-- DRUGI ZADATAK-->
+
+
+
+
+<!-- TRECI ZADATAK-->
+
+
+let opcija3 = document.getElementById("select3");
+
+
+function dohvatiZaPetDana(){
+
+           
+           
+
+            prikaz3.innerHTML=``;
+            
+            
+            let selektovanaOpcija3 = opcija3.options[opcija3.selectedIndex];
+             
+            
+            let s = vrednost;
+            let nazivGrada = selektovanaOpcija3.getAttribute("data-grad");
+            let nazivZemlje = selektovanaOpcija3.getAttribute("data-drzava");
+                
+            let apiString = "http://api.openweathermap.org/data/2.5/forecast?q="
+                        + nazivGrada + ","
+                        + nazivZemlje + "&mode=json" +  "&&units="+s+
+                        "&appid=" + appid; 
+                       
+  
+                $.get(apiString, function (response) {
+  
+                             string = response;
+                             
+                             
+
+                                
+
+                                for(let j=0;j<string.list.length;j++){
+                                    if(j%8==0)
+                                    {
+
+
+                                    
+                                       
+                                
+                                    prikaz3.innerHTML +=`<div class="kutija">
+                                    
+                                    
+                                                  Datum: ${string.list[j].dt_txt}<br>
+                                                 
+                                    Temperatura: ${Math.round((string.list[j].main.temp),0)} <br>
+                                    Minimalna temperatura: ${Math.round((string.list[j].main.temp_min),0)}  <br>
+                                    Maksimalna temperatura: ${Math.round((string.list[j].main.temp_max),0)} <br>
+                                   
+                                  </div>`;
+
+                                 
+
+                                    }
+                              }
+                              });
+                          
+             
+
+
+         
+
+}
+
+
+
+<!-- TRECI ZADATAK-->
+
+
+
+<!-- CETRTI ZADATAK-->
+    
+    function gradoviZaPetDana(){
+
+
+            prikaz4.innerHTML =``;
+
+            let s = vrednost;
+
+            let cekirano = document.getElementsByTagName("input");
+
+            for(var i=cekirano.length/2;i<cekirano.length;i++)
+            {
+                 let brojac = 0;
+
+                if(cekirano[i].checked)
+                        {
+            let nazivGrada = cekirano[i].getAttribute("data-grad");
+            let nazivZemlje = cekirano[i].getAttribute("data-drzava");
+            
+
+
+           let apiString = "http://api.openweathermap.org/data/2.5/forecast?q="
+                        + nazivGrada + ","
+                        + nazivZemlje + "&mode=json" +  "&&units="+s+
+                        "&appid=" + appid; 
+                       
+  
+                $.get(apiString, function (response) {
+  
+                             string = response;
+                            
+                             
+
+                                
+
+                                for(let j=0;j<string.list.length;j++){
+                                    if(j%8==0)
+                                    {
+
+
+                                    
+                                       
+                                
+                                    prikaz4.innerHTML +=`<div class="kutija">
+                                    
+                                  
+                                                  Datum: ${string.list[j].dt_txt}<br>
+                                                 
+                                    Temperatura: ${Math.round((string.list[j].main.temp),0)} <br>
+                                    Minimalna temperatura: ${Math.round((string.list[j].main.temp_min),0)}  <br>
+                                    Maksimalna temperatura: ${Math.round((string.list[j].main.temp_max),0)} <br>
+                                   
+                                  </div>`;
+
+                                   
+
+
+
+                                    }
+
+
+                             
+
+                              }
+
+
+
+                              });
+
+
+
+
+            
+
+                          }
+
+                           
+              };
+
+
+
+    }
+
+
+
+
+        </script>
+
+</section>
+
+
+</div>
+
+
+<footer id="futer">
+<p> Copyright &copy; Vremenska prognoza - 2018 </p>
+<div class="link3">
+
+</div>
+</footer>
+</div>
+</div>
+</body>
+</html>
+</div>
